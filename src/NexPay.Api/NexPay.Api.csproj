@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\docs.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NexPay.Domain\NexPay.Domain.csproj" />
+  </ItemGroup>
+  <!-- <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
+    <Copy SourceFiles="..\NexPay.Domain\bin\docs.xml" DestinationFolder="$(OutDir)/Domain"/>
+  </Target>
+  <Target Name="CopyCustomContentOnPublish" AfterTargets="Publish">
+    <Copy SourceFiles="..\NexPay.Domain\bin\docs.xml" DestinationFolder="$(PublishDir)/Domain"/>
+  </Target> -->
+</Project>
