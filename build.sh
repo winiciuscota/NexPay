@@ -8,11 +8,11 @@ if [ -z "$1" ]
     else
         if [ "$1" = "clear" ]; then
             echo "Clearing project binaries"
-            rm -rf {src,tests}/*/*/{bin,obj}
+            rm -rf {src,tests}/*/{bin,obj}
         fi
         if [ "$1" = "restore" ]; then
             echo "Clearing project binaries"
-            rm -rf {src,tests}/*/*/{bin,obj}
+            rm -rf {src,tests}/*/{bin,obj}
             echo "Restoring"
             dotnet restore
         fi

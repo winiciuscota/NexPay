@@ -6,7 +6,7 @@ namespace NexPay.Domain.Entities
 {
     public class Transaction
     {
-        public int Id { get; }
+        public int Id { get; private set; }
 
         public int UserId { get; set; }
 
