@@ -39,7 +39,7 @@ namespace NexPay.Api.ViewModels
         /// Type of the transaction
         /// </summary>
         /// <value></value>
-        public string TransactionType { get; private set; }
+        public string TransactionType { get; set; }
 
     }
 }

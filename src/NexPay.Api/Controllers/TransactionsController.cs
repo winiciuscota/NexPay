@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using NexPay.Api.ViewModels;
 using NexPay.Domain.Entities;
 using NexPay.Domain.Repositories;
+using NexPay.Domain.ValueObjects;
 
 namespace NexPay.Api.Controllers
 {
@@ -30,10 +31,11 @@ namespace NexPay.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] TransactionQuery query)
         {
-            var transactions = await _transactionRepository.GetAllAsync();
-            return Ok(_mapper.Map<IEnumerable<TransactionVM>>(transactions));
+            var transactions = await _transactionRepository.GetAllAsync(query);
+            var result = _mapper.Map<TransactionPaginatedQueryResult<TransactionVM>>(transactions);
+            return Ok(result);
         }
 
         /// <summary>
@@ -49,7 +51,8 @@ namespace NexPay.Api.Controllers
                 return NotFound();
             }
 
-            return Ok(_mapper.Map<TransactionVM>(transaction));
+            var result = _mapper.Map<TransactionVM>(transaction);
+            return Ok(result);
         }
 
         /// <summary>
@@ -61,6 +64,7 @@ namespace NexPay.Api.Controllers
         {
             if(ModelState.IsValid) {
                 var transactionEntity = _mapper.Map<Transaction>(transaction);
+                transactionEntity.SetTransactionType();
                 _transactionRepository.Save(transactionEntity);
                 await _unitOfWork.CommitAsync();
                 return CreatedAtAction(nameof(Post), _mapper.Map<TransactionVM>(transactionEntity));
@@ -69,6 +73,27 @@ namespace NexPay.Api.Controllers
                 return BadRequest(ModelState);
             }
       
+        }
+
+        /// <summary>
+        /// Delete transaction
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] int id) {
+            var transaction = await _transactionRepository.GetByIdAsync(id);
+
+            if (transaction == null)
+            {
+                return NotFound();
+            }
+            
+            // Call function for soft delete
+            transaction.Delete();
+            await _unitOfWork.CommitAsync();
+            var result = _mapper.Map<TransactionVM>(transaction);
+            return Ok(result);
         }
     }
 }

@@ -53,9 +53,12 @@ namespace NexPay.Api
                     Version = "1.0"
                 });
 
-                var filePath = Path.Combine(System.AppContext.BaseDirectory, "docs.xml");
+                var currentProjectFilePath = Path.Combine(System.AppContext.BaseDirectory, "docs.xml");
+                var domainProjectFilePath = Path.Combine(System.AppContext.BaseDirectory, "Domain/docs.xml");
+                
 
-                c.IncludeXmlComments(filePath);
+                c.IncludeXmlComments(currentProjectFilePath);
+                c.IncludeXmlComments(domainProjectFilePath);
             });
         }
 

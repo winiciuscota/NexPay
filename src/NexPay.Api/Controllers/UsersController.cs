@@ -63,7 +63,8 @@ namespace NexPay.Api.Controllers
                 var userEntity = _mapper.Map<User>(user);
                 _userRepository.Save(userEntity);
                 await _unitOfWork.CommitAsync();
-                return CreatedAtAction(nameof(Post), _mapper.Map<UserVM>(userEntity));
+                var result = _mapper.Map<UserVM>(userEntity);
+                return CreatedAtAction(nameof(Post), result);
             }
             else {
                 return BadRequest(ModelState);

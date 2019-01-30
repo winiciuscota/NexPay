@@ -4,7 +4,7 @@ namespace NexPay.Api.ViewModels
 {
     public class UserVM
     {
-        public int Id { get; }
+        public int Id { get; private set; }
 
         /// <summary>
         /// Name of the user

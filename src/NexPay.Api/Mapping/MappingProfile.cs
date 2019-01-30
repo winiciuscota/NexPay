@@ -11,10 +11,12 @@ namespace NexPay.Api.Mapping
     {
         public MappingProfile()
         {
-            CreateMap<User, UserVM>().ReverseMap()
+            CreateMap<User, UserVM>()
+                .ReverseMap()
                 .ForMember(src => src.Id, opt => opt.Ignore());
 
-            CreateMap<Transaction, TransactionVM>().ReverseMap()
+            CreateMap<Transaction, TransactionVM>()
+                .ReverseMap()
                 .ForMember(src => src.Id, opt => opt.Ignore());
 
         }

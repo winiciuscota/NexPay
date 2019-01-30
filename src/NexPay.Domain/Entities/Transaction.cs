@@ -35,6 +35,10 @@ namespace NexPay.Domain.Entities
             }
         }
 
+        public void Delete() {
+            Deleted = true;
+        }
+
         public Transaction()
         {
             CreatedDate = DateTime.Now;

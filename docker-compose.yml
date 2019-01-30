@@ -1,0 +1,24 @@
+version: '3.6'
+services:
+  proget-postgres:
+    image: postgres:9.5
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - postgres:/var/lib/postgresql/data
+    networks:
+      - db_net
+    restart: on-failure
+
+  webapi:
+    build: ./Database.Dockerfile
+    ports:
+      - "5000:80"
+    networks:
+      - db_net
+    restart: on-failure
+    
+networks:
+  db_net:
+
+volumes:
+  postgres:

@@ -76,6 +76,8 @@ namespace NexPay.Data.Configuration
 
             modelBuilder.Property(x => x.UserId)
                         .HasColumnName("usuario_id");
+
+            modelBuilder.HasQueryFilter(x => !x.Deleted);
         }
     }
 }

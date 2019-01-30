@@ -3,7 +3,7 @@ namespace NexPay.Domain.ValueObjects
     public class Query
     {
         /// <summary>
-        /// Page index
+        /// Page index, starts with 0
         /// </summary>
         /// <value></value>
         public int Page { get; set; }
