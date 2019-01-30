@@ -2,7 +2,7 @@
 
 ## Description
 
-An Api to register and manage residents of a condominium
+An api emulating the behavior of a payment system
 
 ## Technologies used on this project
 
